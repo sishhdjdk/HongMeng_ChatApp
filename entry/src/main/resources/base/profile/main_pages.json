@@ -1,5 +1,39 @@
 {
   "src": [
-    "pages/Index"
+    "pages/AboutPage",
+    "pages/AccountSecurityPage",
+    "pages/AddFriendPage",
+    "pages/Chat_ClassGroup",
+    "pages/Chat_FunGroup",
+    "pages/Chat_InternshipGroup",
+    "pages/Chat_InternTeacher",
+    "pages/Chat_Teacher",
+    "pages/Chat_ThesisGroup",
+    "pages/Chat_XiaoGang",
+    "pages/Chat_XiaoHong",
+    "pages/Chat_XiaoLi",
+    "pages/Chat_XiaoMing",
+    "pages/ChatDetailPage",
+    "pages/ContactDetailPage",
+    "pages/ContactsPage",
+    "pages/CreateGroupPage",
+    "pages/DiscoverPage",
+    "pages/EditProfilePage",
+    "pages/GroupDetailPage",
+    "pages/GroupListPage",
+    "pages/ImagePreviewPage",
+    "pages/LoginPage",
+    "pages/MessageListPage",
+    "pages/MomentsDetailPage",
+    "pages/NewFriendPage",
+    "pages/NotificationSettingsPage",
+    "pages/PrivacySettingsPage",
+    "pages/ProfilePage",
+    "pages/PublishMomentPage",
+    "pages/RegisterPage",
+    "pages/SearchMessagePage",
+    "pages/SettingsPage",
+    "pages/SplashPage"
+
   ]
 }
