@@ -7,20 +7,7 @@ import router from '@ohos.router'
 @Entry
 @Component
 struct SplashPage {
-  @State alpha: number = 0 // 透明度动画
 
-  // 页面生命周期：页面即将显示
-  aboutToAppear() {
-    // 渐显动画
-    animateTo({ duration: 1000 }, () => {
-      this.alpha = 1
-    })
-
-    // 3秒后跳转到登录页
-    setTimeout(() => {
-      router.pushUrl({ url: 'pages/LoginPage' })
-    }, 3000)
-  }
 
   build() {
     Column() {
@@ -29,21 +16,32 @@ struct SplashPage {
         .width(120)
         .height(120)
         .margin({ bottom: 20 })
-        .opacity(this.alpha)
-
       // 应用名称
       Text('聊天助手')
         .fontSize(32)
         .fontWeight(FontWeight.Bold)
         .fontColor('#07C160')
-        .opacity(this.alpha)
 
       // 欢迎语
       Text('连接你我，沟通无限')
         .fontSize(16)
         .fontColor('#999999')
         .margin({ top: 10 })
-        .opacity(this.alpha)
+      //跳转按钮
+      Button('前往登录')
+        .width('90%')
+        .height(50)
+        .fontSize(18)
+        .fontColor('#FFFFFF')
+        .backgroundColor('#CCCCCC')
+        .borderRadius(8)
+        .margin({ top: 40 })
+        .onClick(() => {
+          this.getUIContext().getRouter().replaceUrl({
+            url:"pages/LoginPage"
+          }
+          )
+        })
     }
     .width('100%')
     .height('100%')

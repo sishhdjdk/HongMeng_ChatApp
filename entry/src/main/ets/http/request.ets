@@ -25,22 +25,26 @@ function request(url: string, method: http.RequestMethod, params?: string, heade
     base_url+url,options
   );
 
-  let getjson: string = '';
+  // let getjson: string = '';
   return responseResult.then((value: http.HttpResponse) => {
     console.log('请求状态 -- > ' + value.responseCode);
-    if (value.responseCode === 200) {
+    if (value.responseCode >= 200 && value.responseCode < 300) {
       console.log("请求成功");
       let result = `${value.result}`;
-      getjson = result;
+      // getjson = result;
+      return result;
     } else {
-      getjson = '';
+      console.warn(`请求失败，状态码: ${value.responseCode}`);
+      // getjson = '';
+      throw new Error(`HTTP error! status: ${value.responseCode}`);
     }
-    return getjson;
   }).catch((err:Error) => {
     console.error("error",JSON.stringify(err))
     httpRequest.destroy();
-    return '';
+    // return '';
+    return Promise.reject(err);
   });
+
 }
 export function get(url: string,header?:HerderType){
   return request(url, http.RequestMethod.GET,'',header)

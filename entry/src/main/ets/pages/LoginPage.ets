@@ -1,3 +1,4 @@
+import { login } from "../http/userHttp"
 /**
  * 登录页
  * 功能：用户登录界面，包含账号密码输入、登录按钮、注册入口
@@ -7,21 +8,28 @@ import router from '@ohos.router'
 @Entry
 @Component
 struct LoginPage {
-  @State account: string = '' // 账号
+  @State username: string = '' // 账号
   @State password: string = '' // 密码
   @State isPasswordVisible: boolean = false // 密码是否可见
   @State canLogin: boolean = false // 是否可以登录
 
   // 检查是否可以登录
   checkCanLogin() {
-    this.canLogin = this.account.length > 0 && this.password.length >= 6
+    this.canLogin = this.username.length > 0 && this.password.length >= 6
   }
 
   // 登录操作
   handleLogin() {
     if (this.canLogin) {
-      // 跳转到主页
-      router.replaceUrl({ url: 'pages/MessageListPage' })
+      let data: string = JSON.stringify({ "username": this.username, "password": this.password })
+      login(data).then((res) => {
+        console.log("data", data);
+        console.log("res data", JSON.stringify(res));
+        this.getUIContext().getRouter().replaceUrl({
+          url: 'pages/MessageListPage'
+        })
+      }).catch(() => {
+      });
     }
   }
 
@@ -33,7 +41,10 @@ struct LoginPage {
           .width(24)
           .height(24)
           .onClick(() => {
-            router.back()
+            this.getUIContext().getRouter().replaceUrl({
+              url: "pages/SplashPage"
+              }
+            )
           })
       }
       .width('100%')
@@ -58,7 +69,7 @@ struct LoginPage {
           .backgroundColor('#F5F5F5')
           .borderRadius(8)
           .onChange((value: string) => {
-            this.account = value
+            this.username = value
             this.checkCanLogin()
           })
 
@@ -118,7 +129,9 @@ struct LoginPage {
           .fontSize(14)
           .fontColor('#07C160')
           .onClick(() => {
-            router.pushUrl({ url: 'pages/RegisterPage' })
+            this.getUIContext().getRouter().replaceUrl({
+              url: "pages/RegisterPage"
+            })
           })
       }
       .margin({ top: 20 })

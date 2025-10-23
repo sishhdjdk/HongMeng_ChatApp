@@ -1,3 +1,4 @@
+import {register} from "../http/userHttp"
 /**
  * 注册页
  * 功能：用户注册界面，包含用户名、手机号、密码输入和注册按钮
@@ -21,11 +22,20 @@ struct RegisterPage {
                        this.password === this.confirmPassword
   }
 
+
   // 注册操作
   handleRegister() {
     if (this.canRegister) {
-      // 注册成功，跳转到登录页
-      router.back()
+    let date = JSON.stringify({"username":this.username,"password":this.password,"phone":this.phone})
+      console.log(date)
+    register(date).then((res)=>{
+      console.log("res" + JSON.stringify(res));
+      this.getUIContext().getRouter().replaceUrl({
+        url:"pages/LoginPage"
+      })
+
+
+    }).catch(()=>{})
     }
   }
 
@@ -37,7 +47,9 @@ struct RegisterPage {
           .width(24)
           .height(24)
           .onClick(() => {
-            router.back()
+            this.getUIContext().getRouter().replaceUrl({
+              url:"pages/LoginPage"
+            })
           })
 
         Text('注册账号')

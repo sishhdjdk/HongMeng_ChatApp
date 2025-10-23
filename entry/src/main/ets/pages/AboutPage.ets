@@ -17,7 +17,9 @@ struct AboutPage {
           .width(24)
           .height(24)
           .onClick(() => {
-            router.back()
+            this.getUIContext().getRouter().replaceUrl({
+              url:"pages/SettingsPage"
+            })
           })
 
         Text('关于微信')
